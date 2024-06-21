@@ -1,0 +1,37 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: |
+        cd vite-react-williamr-app
+        npm install
+
+    - name: Run Vitest directly
+      run: npx vitest run
+      #working-directory: 
+
+    - name: Build project
+      run: |
+        cd vite-react-williamr-app
+        npm run build
