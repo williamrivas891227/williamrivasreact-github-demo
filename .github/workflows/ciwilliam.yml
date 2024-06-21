@@ -27,10 +27,9 @@ jobs:
         cd vite-react-williamr-app
         npm install
 
-    #- name: Run tests
-      #run: |
-        #cd vite-react-williamr-app
-        #npm test
+    - name: Run Vitest directly
+      run: npx vitest run
+      #working-directory: 
 
     - name: Build project
       run: |
